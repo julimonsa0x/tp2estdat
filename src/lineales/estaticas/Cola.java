@@ -19,7 +19,7 @@ public class Cola {
     public boolean poner(Object obj) {
         boolean exito;
         // si se desborda al acceder arreglo
-        if (this.fin+1 == SIZE) {
+        if (this.fin +1 == SIZE-1) {
 
             this.fin = (this.fin+1)%SIZE;
             this.arreglo[fin] = obj;
@@ -72,7 +72,7 @@ public class Cola {
     }
     
     public Cola clonar() {
-        
+        return new Cola();
     }
     
     @Override
@@ -92,7 +92,7 @@ public class Cola {
                     this.fin = (this.fin+1)%SIZE;
                     visitados = this.fin;
                     cadenaCola += ( String.valueOf( this.arreglo[visitados] )) + ", ";
-                    
+                    visitados++;
                 }
             }
         } else {

@@ -3,12 +3,13 @@ package test.lineales;
 import TDA.Alumno;
 import java.util.Scanner;
 import lineales.dinamicas.Pila;
+import static test.lineales.PilaTest.load_stack; // private method!!!!
 
 /**
  *
  * @author julian.monsalves
  */
-@Deprecated(since = "27-03-2025", forRemoval = true)
+@Deprecated()
 public class TestPila {
     
     static Scanner sc = new Scanner(System.in);
@@ -21,12 +22,29 @@ public class TestPila {
         // test metodo apilar()
         System.out.println("==== RUNNING test.lineales.TestPila.java ====");
 
+
+
+
+        /*debugging test3: testStackElementInNonEmptyStack()
+        Pila p=load_stack("1,2",',');
+        
+        p.obtenerTope();
+
+
+        boolean ap = p.apilar(3);
+        boolean ev = p.esVacia();
+        Object t = p.obtenerTope();
+        String s = p.toString();
+        */
+
+
+        /*
         System.out.println("debugging test1");
         Pila p = new Pila();
         boolean ev = p.esVacia();
         Object t = p.obtenerTope();
         String s = p.toString();
-        
+        */
         
         System.out.println("Apilando: 5");
         pila1.apilar(5);
