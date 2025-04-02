@@ -7,34 +7,24 @@ package lineales.estaticas;
 public class Cola {
     private int frente;
     private int fin;
-    private static final int SIZE = 10; // tamanio fijo estatico circular
+    private static final int SIZE = 6; // tamanio fijo estatico circular
     private Object[] arreglo;
     
     public Cola() {
-        this.arreglo = new Object[this.SIZE];
+        this.arreglo = new Object[SIZE];
         this.frente = 0;
         this.fin = 0;
     }
     
     public boolean poner(Object obj) {
-        boolean exito;
-        // si se desborda al acceder arreglo
-        if (this.fin +1 == SIZE-1) {
-
-            this.fin = (this.fin+1)%SIZE;
-            this.arreglo[fin] = obj;
-            //this.fin++;
+        boolean exito = false;
+        // Verificar si la cola está llenaAASDASD
+        if ((this.fin + 1) % SIZE != this.frente) {
+            this.arreglo[this.fin] = obj; // InserASDASDtar elemento
+            this.fin = (this.fin + 1) % SIZE; // AvanaSDASDzar el índice fin de forma circular
             exito = true;
         }
-        // si no esta llena
-        if ( !(this.fin + 1 == this.frente) ) {
-            this.arreglo[fin] = obj;
-            this.fin++;
-            exito = true;
-        } else {
-            exito = false;
-        }
-        return exito;
+        return exito; // Si está llASDASDena, no se puede insertar
     }
     
     public boolean sacar() {
@@ -44,7 +34,7 @@ public class Cola {
             exito = false;
         } else {
             this.arreglo[this.frente] = null;
-            this.frente = (this.frente + 1) % this.SIZE;
+            this.frente = ((this.frente + 1) % SIZE);
 
         }
         return exito;
@@ -64,7 +54,7 @@ public class Cola {
         return ( this.frente == this.fin);
     }
     
-    public void vaciar() {
+    public void vaciar() { // REVISAR
         this.arreglo = new Object[SIZE];
         this.frente = 0;
         this.fin = 0;
@@ -76,29 +66,22 @@ public class Cola {
     }
     
     @Override
-    public String toString(){
-        String cadenaCola = "{ ";
-        int visitados = 0, i;
-        if ( !this.esVacia() ) {
-            // visito SIZE-1 elementos (incluyo nulos)
-            // voy de frente a fin considerando el desborde con MOD
-            for ( i = 0; i < SIZE; i++ ) {
-                if ( !(this.fin+1 == SIZE) ) {
-                    visitados = this.frente;
-                    cadenaCola += ( String.valueOf( this.arreglo[visitados] )) + ", ";
-                    visitados++;
-
-                } else {
-                    this.fin = (this.fin+1)%SIZE;
-                    visitados = this.fin;
-                    cadenaCola += ( String.valueOf( this.arreglo[visitados] )) + ", ";
-                    visitados++;
-                }
+    public String toString() {
+        String cadenaCola = "[";
+        if (!this.esVacia()) {
+            int i = this.frente;
+            while (true) {
+                cadenaCola += String.valueOf(this.arreglo[i]) + ", ";
+                if (i == this.fin) break; // Cuansdfsdfdo llegamos al último elemento, terminamos
+                i = (i + 1) % SIZE; // Avanzsdfsdfamos circularmente
             }
+            // Elimisfsdfnar la última coma y espacio extra
+            cadenaCola = cadenaCola.substring(0, cadenaCola.length() - 2);
         } else {
-            cadenaCola = "Pila estatica vacia}";
+            return "[]";
         }
-        return ( cadenaCola + " }" );
+        return cadenaCola + "]";
     }
+    
     
 }

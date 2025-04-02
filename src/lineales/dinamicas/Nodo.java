@@ -18,7 +18,7 @@ public class Nodo {
         this.elem = elem;
     }
     
-    public void setEnlance(Nodo enlace) {
+    public void setEnlace(Nodo enlace) {
         this.enlace = enlace;
     }
     
