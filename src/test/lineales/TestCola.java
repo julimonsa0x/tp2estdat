@@ -1,6 +1,6 @@
 package test.lineales;
 
-import lineales.dinamicas.Cola;
+import lineales.estaticas.Cola;
 
 /**
  *
@@ -13,6 +13,11 @@ public class TestCola {
         Cola c2 = new Cola();
         c1.poner("pepe1");
         c1.poner("pepe2");
+        c1.poner("pepe2.5");
+        c1.poner("pepe2.6");
+        c1.poner("pepe2.7");
+        c1.vaciar();
+        c1.toString();
         //c1.sacar();
         c1.poner("pepe3");
         c1.poner("pepe4");
@@ -37,6 +42,9 @@ public class TestCola {
         c1.poner("pepe14");
         c1.poner("pepe15");
         c1.poner("pepe16");
+        c1.poner("pepe17");
+        c1.poner("pepe18");
+        c1.poner("pepe19");
 
         System.out.println( c1.toString() );
     }

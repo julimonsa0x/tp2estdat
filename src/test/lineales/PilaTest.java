@@ -2,18 +2,44 @@ package test.lineales;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-import lineales.dinamicas.Pila;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import lineales.estaticas.Pila;
 
 /**
  *
  * @author Catedra EDAT - FAI - UNCOMA
- *         Ultima modificacion: 17/03/2025
+ *         Ultima modificación: 17/03/2025
  *
  */
 
+ /*
+  * Se asume que la salida de toString() para Pila devuelve 
+  * un texto del tipo [3,2,1] donde 3 es el tope y 1 la base de la pila,
+  * para una pila donde los elemenos apilados fueron 1, 2 y 3 en ese orden.
+  * 
+  * jre linux 1.8
+  * julian.monsalves@aula3-cpu15:~/Code/tp2estdat$ java -version
+  * java version "1.8.0_201"
+  * Java(TM) SE Runtime Environment (build 1.8.0_201-b09)
+  * Java HotSpot(TM) 64-Bit Server VM (build 25.201-b09, mixed mode)  
+  */
+  
 public class PilaTest {
 
-    public static Pila load_stack(String elements, char separator) {
+    private static boolean isSubstring(String s, String rx){
+        Pattern pattern = Pattern.compile(rx);
+        Matcher matcher = pattern.matcher(s);
+        boolean findSubstring = false;
+        while (matcher.find()) {
+            System.out.println(s.substring(matcher.start(), matcher.end()));
+            findSubstring = true;
+        }
+        return findSubstring;
+    }
+
+    private static Pila load_stack(String elements, char separator) {
         Pila p = new Pila();
         int lengthElements = elements.length();
         char d = ' ';
@@ -29,20 +55,21 @@ public class PilaTest {
                 number += d;
             }
         }
-        System.err.println(p.toString());
+        //System.out.println(p.toString());
         return p;
     }
 
     @Test
     public void testCreateEmptyStack() {
-        Pila p = new Pila(); 
+        Pila p = new Pila();
         boolean ev = p.esVacia();
         Object t = p.obtenerTope();
         String s = p.toString();
+        String rx="\\[\\]";
+        boolean findSubstring = isSubstring(s,rx);
         assertEquals(ev,true);
         assertEquals(t, null);
-        //String rx="\\[\\]";
-        //assertEquals(s.matches(rx),true);
+        assertEquals(findSubstring,true);
     };
 
     @Test
@@ -52,11 +79,12 @@ public class PilaTest {
         boolean ev = p.esVacia();
         Object t = p.obtenerTope();
         String s = p.toString();
+        String rx="\\[1\\]";
+        boolean findSubstring = isSubstring(s,rx);
         assertEquals(ap,true);
         assertEquals(ev,false);
         assertEquals(t, 1);
-        //String rx="\\[1\\]";
-        //assertEquals(s.matches(rx),true);
+        assertEquals(findSubstring,true);
 
     };
 
@@ -64,14 +92,17 @@ public class PilaTest {
     public void testStackElementInNonEmptyStack() {
         Pila p=load_stack("1,2",',');
         boolean ap = p.apilar(3);
+        System.out.println(p.toString());
         boolean ev = p.esVacia();
         Object t = p.obtenerTope();
+        System.out.println(t);
         String s = p.toString();
+        String rx="\\[3,2,1\\]";
+        boolean findSubstring = isSubstring(s,rx);
         assertEquals(ap,true);
         assertEquals(ev,false);
         assertEquals(t, 3);
-        //String rx="\\[1,2,3\\]";
-        //assertEquals(s.matches(rx),true);
+        assertEquals(findSubstring,true);
     };
 
     @Test
@@ -81,10 +112,11 @@ public class PilaTest {
         boolean ev = p.esVacia();
         Object t = p.obtenerTope();
         String s = p.toString();
+        String rx="\\[\\]";
+        boolean findSubstring = isSubstring(s,rx);
         assertEquals(ev,true);
         assertEquals(t, null);
-        //String rx="\\[\\]";
-        //assertEquals(s.matches(rx),true);
+        assertEquals(findSubstring,true);
 
     };
 
@@ -95,11 +127,12 @@ public class PilaTest {
         boolean ev = p.esVacia();
         Object t = p.obtenerTope();
         String s = p.toString();
+        String rx="\\[2,1\\]";
+        boolean findSubstring = isSubstring(s,rx);
         assertEquals(des,true);
         assertEquals(ev,false);
         assertEquals(t, 2);
-        //String rx="\\[1,2\\]";
-        //assertEquals(s.matches(rx),true);
+        assertEquals(findSubstring,true);
 
     };
 
@@ -110,12 +143,12 @@ public class PilaTest {
         boolean ev = p.esVacia();
         Object t = p.obtenerTope();
         String s = p.toString();
+        String rx="\\[\\]";
+        boolean findSubstring = isSubstring(s, rx);
         assertEquals(des,false);
         assertEquals(ev,true);
         assertEquals(t, null);
-        //String rx="\\[\\]";
-        //assertEquals(s.matches(rx),true);
-
+        assertEquals(findSubstring,true);
     };
 
 }

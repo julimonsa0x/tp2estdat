@@ -19,7 +19,7 @@ public class Cola {
     public boolean poner(Object obj) {
         boolean exito = false;
         // Verificar si la cola está llenaAASDASD
-        if ((this.fin + 1) % SIZE != this.frente) {
+        if ( (this.fin + 1) % SIZE != this.frente ) {
             this.arreglo[this.fin] = obj; // InserASDASDtar elemento
             this.fin = (this.fin + 1) % SIZE; // AvanaSDASDzar el índice fin de forma circular
             exito = true;
@@ -35,18 +35,14 @@ public class Cola {
         } else {
             this.arreglo[this.frente] = null;
             this.frente = ((this.frente + 1) % SIZE);
-
         }
         return exito;
     }
     
-    public Object getObjFrente() {
+    public Object obtenerFrente() {
+        // simplified if-else
         Object theObject;
-        if ( !this.esVacia() ) {
-            theObject = this.arreglo[frente];
-        } else {
-            theObject = null;
-        }
+        theObject = this.arreglo[frente];
         return theObject;
     }
     
@@ -54,11 +50,14 @@ public class Cola {
         return ( this.frente == this.fin);
     }
     
-    public void vaciar() { // REVISAR
-        this.arreglo = new Object[SIZE];
-        this.frente = 0;
+    public void vaciar() {
+        int i = frente; 
+        while ( i < this.fin ) {
+            arreglo[i] = null;
+            i = ( i+1 ) % this.SIZE; // avanzo circularmente
+        }
         this.fin = 0;
-                
+        this.frente = 0;       
     }
     
     public Cola clonar() {
@@ -70,13 +69,10 @@ public class Cola {
         String cadenaCola = "[";
         if (!this.esVacia()) {
             int i = this.frente;
-            while (true) {
+            while (i != this.fin) {
                 cadenaCola += String.valueOf(this.arreglo[i]) + ", ";
-                if (i == this.fin) break; // Cuansdfsdfdo llegamos al último elemento, terminamos
-                i = (i + 1) % SIZE; // Avanzsdfsdfamos circularmente
+                i = (i + 1) % SIZE; // Avanzo circularmente+
             }
-            // Elimisfsdfnar la última coma y espacio extra
-            cadenaCola = cadenaCola.substring(0, cadenaCola.length() - 2);
         } else {
             return "[]";
         }
