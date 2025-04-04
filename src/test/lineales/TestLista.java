@@ -8,6 +8,16 @@ public class TestLista {
         Lista l2 = new Lista();
 
         l1.insertar("pepe1", 1);
+        int len =  l1.longitud();
+        l1.eliminar(1);
+        len =  l1.longitud();
+        l1.insertar(1111111,1);
+
+        try {
+            l1.insertar("pepeException", 9);
+        } catch (NullPointerException exc) {
+            System.out.println("debug print null pointer exception as expected: " + exc.getMessage());
+        }
         l1.insertar("pepe2", 2);
         l1.insertar("pepe3", 3);
         l1.insertar("pepe4", 4);

@@ -1,5 +1,6 @@
 package test.lineales;
 
+import TDA.Alumno;
 import lineales.estaticas.Cola;
 
 /**
@@ -11,6 +12,8 @@ public class TestCola {
     public static void main(String[] args) {
         Cola c1 = new Cola();
         Cola c2 = new Cola();
+        Alumno alumno1 = new Alumno(1234);
+        alumno1.setNombre("Julian");
         c1.poner("pepe1");
         c1.poner("pepe2");
         c1.poner("pepe2.5");
@@ -21,9 +24,13 @@ public class TestCola {
         //c1.sacar();
         c1.poner("pepe3");
         c1.poner("pepe4");
-        c1.sacar();
+        c1.poner("pepe4.5");
+        //c1.sacar();
         c1.poner("pepe5");
+        c1.poner(alumno1);
         c2 = c1.clonar();
+        alumno1.setNombre("Julianito");
+        c2.poner(999);
         c1.poner("pepe6");
         c1.sacar();
         c1.poner("pepe7");

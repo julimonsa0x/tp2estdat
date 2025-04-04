@@ -3,7 +3,7 @@ package test.lineales;
 import TDA.Alumno;
 import java.util.Scanner;
 import lineales.dinamicas.Pila;
-import static test.lineales.PilaTest.load_stack; // private method!!!!
+//import static test.lineales.PilaTest.load_stack; // private method!!!!
 
 /**
  *

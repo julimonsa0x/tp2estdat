@@ -10,6 +10,9 @@ public class Cola {
     private static final int SIZE = 6; // tamanio fijo estatico circular
     private Object[] arreglo;
     
+    /**
+     * Constructor vacio aunque yo le pasaria size por parametro
+     */
     public Cola() {
         this.arreglo = new Object[SIZE];
         this.frente = 0;
@@ -40,7 +43,7 @@ public class Cola {
     }
     
     public Object obtenerFrente() {
-        // simplified if-else
+        // simplifico el if-else
         Object theObject;
         theObject = this.arreglo[frente];
         return theObject;
@@ -61,7 +64,18 @@ public class Cola {
     }
     
     public Cola clonar() {
-        return new Cola();
+        Cola clon = new Cola();
+        int i = this.frente;
+        while (i != this.fin) {
+            // to-do fix aux reference!!
+            Object aux = this.arreglo[i];
+            clon.arreglo[i] = aux;
+
+            i = (i + 1) % SIZE; // Avanzo circularmente
+        }
+        clon.frente = this.frente;
+        clon.fin = this.fin;
+        return clon;
     }
     
     @Override
