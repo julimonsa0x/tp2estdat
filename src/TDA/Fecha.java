@@ -16,12 +16,29 @@ public class Fecha {
         this.anio = anio;
     }
 
-    // considerar metodo adicion y resta de dias meses y años 
+    // considerar metodo adicion y resta de dias meses y años
+    public boolean sumar(int dias) {
+		// 
+
+        return true;
+    }
     // considerar metodo esFechaValida(Fecha unaFecha): boolean
     // e.g 31/02/2020 no es valida
     // considerar metodo esBisiesto(): boolean
     // considerar un .toString() --> "dd/mm/aaaa"
-	// creo ya hice un tda fecha en desalg revisar!
-  
+	  // creo ya hice un tda fecha en desalg revisar!
+    
+    public boolean esBisiesto() {
+        if ((anio % 4 == 0 && anio % 100 != 0) || (anio % 400 == 0)) {
+            return true;
+        }
+        return false;
+    }
 
+    @Override
+    public String toString() {
+        return String.format("%02d/%02d/%04d", dia, mes, anio);
+    }
+
+    
 }
