@@ -2,7 +2,7 @@ package test.lineales;
 
 import lineales.dinamicas.Lista;
 
-public class TestLista {
+public class MyTestLista {
     public static void main(String[] args) {
         Lista l1 = new Lista();
         Lista l2 = new Lista();

@@ -118,7 +118,7 @@ public class Lista {
         cabecera = null;
     }
 
-    public Lista clonar() {
+    public Lista clone() {
         Lista clon = new Lista();
         Nodo aux1 = this.cabecera;
         Nodo aux2 = null;

@@ -65,7 +65,7 @@ public class Pila {
         this.tope = -1;
     }
     
-    public Pila clonar() {
+    public Pila clone() {
         Pila pilaClone = new Pila();
         pilaClone.arreglo = this.arreglo;
         pilaClone.tope = this.tope;

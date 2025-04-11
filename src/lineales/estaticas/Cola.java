@@ -63,7 +63,7 @@ public class Cola {
         this.frente = 0;       
     }
     
-    public Cola clonar() {
+    public Cola clone() {
         Cola clon = new Cola();
         int i = this.frente;
         while (i != this.fin) {
@@ -84,8 +84,11 @@ public class Cola {
         if (!this.esVacia()) {
             int i = this.frente;
             while (i != this.fin) {
-                cadenaCola += String.valueOf(this.arreglo[i]) + ", ";
-                i = (i + 1) % SIZE; // Avanzo circularmente+
+                cadenaCola += String.valueOf(this.arreglo[i]);
+                i = (i + 1) % SIZE; // Avanzo circularmente
+                if (i != fin) {
+                    cadenaCola += ",";
+                }
             }
         } else {
             return "[]";

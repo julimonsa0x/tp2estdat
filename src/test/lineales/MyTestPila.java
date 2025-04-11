@@ -10,7 +10,7 @@ import lineales.dinamicas.Pila;
  * @author julian.monsalves
  */
 @Deprecated()
-public class TestPila {
+public class MyTestPila {
     
     static Scanner sc = new Scanner(System.in);
     

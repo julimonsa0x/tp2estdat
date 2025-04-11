@@ -1,11 +1,13 @@
+//package lineales.tests.paraEstudiantes;
 package test.lineales;
-import static org.junit.Assert.assertEquals;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import lineales.estaticas.Pila;
+import lineales.dinamicas.*;
 
 /**
  *
@@ -16,14 +18,9 @@ import lineales.estaticas.Pila;
 
  /*
   * Se asume que la salida de toString() para Pila devuelve 
-  * un texto del tipo [3,2,1] donde 3 es el tope y 1 la base de la pila,
+  * un texto que incluye la subcadena del tipo [3,2,1] donde 3 es el tope y 1 la base de la pila,
   * para una pila donde los elemenos apilados fueron 1, 2 y 3 en ese orden.
-  * 
-  * jre linux 1.8
-  * julian.monsalves@aula3-cpu15:~/Code/tp2estdat$ java -version
-  * java version "1.8.0_201"
-  * Java(TM) SE Runtime Environment (build 1.8.0_201-b09)
-  * Java HotSpot(TM) 64-Bit Server VM (build 25.201-b09, mixed mode)  
+  * El texto de salida del toString() puede contener cualquier otro texto antes o despues de la subcadena anterior.
   */
   
 public class PilaTest {
@@ -33,7 +30,7 @@ public class PilaTest {
         Matcher matcher = pattern.matcher(s);
         boolean findSubstring = false;
         while (matcher.find()) {
-            System.out.println(s.substring(matcher.start(), matcher.end()));
+            //System.out.println(s.substring(matcher.start(), matcher.end()));
             findSubstring = true;
         }
         return findSubstring;
@@ -92,10 +89,8 @@ public class PilaTest {
     public void testStackElementInNonEmptyStack() {
         Pila p=load_stack("1,2",',');
         boolean ap = p.apilar(3);
-        System.out.println(p.toString());
         boolean ev = p.esVacia();
         Object t = p.obtenerTope();
-        System.out.println(t);
         String s = p.toString();
         String rx="\\[3,2,1\\]";
         boolean findSubstring = isSubstring(s,rx);
@@ -150,5 +145,52 @@ public class PilaTest {
         assertEquals(t, null);
         assertEquals(findSubstring,true);
     };
+
+    @Test
+    public void testCloneNonEmptyStack(){
+        Pila p=load_stack("1,2,3",',');
+        Pila pClone=p.clone();
+        boolean ev = p.esVacia();
+        boolean evClone = pClone.esVacia();
+        Object t = p.obtenerTope();
+        Object tClone = pClone.obtenerTope();
+        String s = p.toString();
+        String sClone = pClone.toString();
+        String rx="\\[3,2,1\\]";
+        boolean findSubstring = isSubstring(s,rx);
+        boolean findSubstringClone = isSubstring(sClone, rx);
+        assertEquals(ev,false);
+        assertEquals(evClone,false);
+        assertEquals(t, 3);
+        assertEquals(tClone,3);
+        assertEquals(findSubstring,true);
+        assertEquals(findSubstringClone,true);
+        assertNotEquals(pClone,p);
+        assertEquals(s,sClone);
+    }
+
+    @Test
+    public void testCloneEmptyStack(){
+        Pila p=new Pila();
+        Pila pClone=p.clone();
+        boolean ev = p.esVacia();
+        boolean evClone = pClone.esVacia();
+        Object t = p.obtenerTope();
+        Object tClone = pClone.obtenerTope();
+        String s = p.toString();
+        String sClone = pClone.toString();
+        String rx="\\[\\]";
+        boolean findSubstring = isSubstring(s,rx);
+        boolean findSubstringClone = isSubstring(sClone, rx);
+        assertEquals(ev,true);
+        assertEquals(evClone,true);
+        assertEquals(t, null);
+        assertEquals(tClone,null);
+        assertEquals(findSubstring,true);
+        assertEquals(findSubstringClone,true);
+        assertNotEquals(pClone,p);
+        assertEquals(s,sClone);
+        
+    }
 
 }
