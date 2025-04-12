@@ -1,22 +1,43 @@
 ## Getting Started
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Archivos para tp2 Estructuras Lineales de la materia Estructuras de Datos 2025
+(excepto directorio jerarquicas --> tp3)
 
 ## Folder Structure
 
 The workspace contains two folders by default, where:
 
 - `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
+- `lib`: the folder to maintain dependencies (junit-4.13.2.jar & hamcrest-core-1.3.jar installed through VSCode extension named "Test Runner for Java")
+```text
+TP2/
+├── lib/
+│   ├── hamcrest-core-1.3.jar
+│   └── junit-4.13.2.jar
+├── src/
+│   ├── lineales/
+│   │   ├── dinamicas/
+│   │   │   ├── Cola.java
+│   │   │   ├── Lista.java
+│   │   │   ├── Nodo.java
+│   │   │   └── Pila.java
+│   │   └── estaticas/
+│   │       ├── Cola.java
+│   │       └── Pila.java
+├── test/
+│   └── lineales/
+│       ├── ColaTest.java
+│       ├── ListaTest.java
+│       ├── MyTestCola.java
+│       ├── MyTestLista.java
+│       ├── MyTestPila.java
+│       ├── PilaTest-old.java
+│       └── PilaTest.java
+```
 ## Dependency Management
 
 The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
-
+(???)
 
 ## Indispensable Extensions
 
