@@ -1,0 +1,22 @@
+# Ignorar binarios y salidas de compilación
+/bin/
+/build/
+/out/
+
+# Carpetas de configuración de VS Code
+.vscode/
+
+# Librerías externas (si las agregás manualmente)
+lib/
+
+# Archivos de sistema
+*.class
+*.log
+*.tmp
+*.swp
+
+# Ignorar carpeta
+/diegoCode/
+
+# Archivos generados por pruebas
+*.old.java
