@@ -1,5 +1,10 @@
 package lineales.dinamicas;
 
+/**
+ * @author Julian Monsalves, Legajo FAI-4479
+ * @author Jazmin Elañei Vargas, Legajo FAI-????
+ * @author Julian, Legajo FAI-????
+ */
 public class Cola {
     private Nodo frente;
     private Nodo fin;
@@ -51,10 +56,9 @@ public class Cola {
     public void vaciar() {
         this.frente = null;
         this.fin = null;
-        // consider force garbage collection ???
-        // System.gc();
     }
 
+    @Override
     public Cola clone() {
         Cola clon = new Cola();
         Nodo aux1 = this.frente;
@@ -63,7 +67,6 @@ public class Cola {
             aux1 = aux1.getEnlace();
             Nodo aux2 = clon.frente;
             while (aux1 != null) {
-    
                 aux2.setEnlace(new Nodo(aux1.getElem(), null));
                 aux2 = aux2.getEnlace();
                 aux1 = aux1.getEnlace();            
@@ -77,11 +80,10 @@ public class Cola {
     public String toString() {
         String colaString = "[";
         Nodo auxString = this.frente;
-        // avoid infinite loop 
         while ( auxString != null) {
             // uso el String.valueOf por si algun nodo tiene algun objeto con toString() definido, e.g: Alumno.
-            //colaString += String.valueOf(auxString.getElem()) + String.valueOf(auxString.getEnlace() != null ? ", " : ""); comentado porque uso el String.valueOf en el caso de que mi Cola contenga <Integer, String, TDA> entonces a la hora de imprimir el TDA.toString() se formatea correctamente --> no aplica para nuestros casos pero estaba bueno considerarlo por que queria testearlo con los TDA Fecha y Alumno
-            colaString += auxString.getElem() + (auxString.getEnlace() != null ? "," : "");
+            //colaString += String.valueOf(auxString.getElem()) + String.valueOf(auxString.getEnlace() != null ? ", " : ""); comentado porque uso el String.valueOf en caso de que mi Cola contenga <Integer, String, TDA> entonces a la hora de imprimir el TDA.toString() se formatea correctamente --> no aplica para nuestros casos pero estaba bueno considerarlo por que queria testearlo con los TDA Fecha y Alumno
+            colaString += auxString.getElem() + ( (auxString.getEnlace() != null) ? "," : "");
             auxString = auxString.getEnlace();
         }
         return colaString + "]";

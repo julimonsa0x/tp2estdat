@@ -1,8 +1,9 @@
 package lineales.estaticas;
 
 /**
- *
- * @author julian.monsalves
+ * @author Julian Andres Monsalves Villagra, Legajo FAI-4479
+ * @author Jazmin Elañei Vargas, Legajo FAI-
+ * @author Julian, Legajo FAI-????
  */
 public class Pila {
     private Object[] arreglo;
@@ -29,7 +30,7 @@ public class Pila {
     }
     
     public boolean desapilar() {
-        boolean exito;
+        /*boolean exito;
         if (this.tope > -1) {
             this.arreglo[tope] = null;
             tope--;
@@ -38,6 +39,17 @@ public class Pila {
             // error: pila vacia (tope -1)
             exito = false;
         } 
+        return exito;*/
+        boolean exito;
+        if(this.tope == -1) {
+            //Error: pila vacia
+            exito = false;
+        } else {
+            //pone el elemento tope en nulo y baja el tope al espacio anterior
+            this.arreglo[tope] = null;
+            this.tope--;
+            exito = true;
+        }
         return exito;
     }
     
@@ -51,40 +63,39 @@ public class Pila {
         }
         return pepe;
     } 
-    
-    /**
-     * 
-     * @return true si esta vacia, false caso contrario.
-     */
+
     public boolean esVacia() {
         return this.tope == -1;
     }
     
     public void vaciar() {
-        arreglo = new Object[size];
+        // arreglo = new Object[size]; --> es uno por uno el vaciado
+        int i;
+        for (i = tope; i > -1; i--) {
+            this.arreglo[i] = null;
+        }
         this.tope = -1;
     }
     
+
+    @Override
     public Pila clone() {
         Pila pilaClone = new Pila();
-        pilaClone.arreglo = this.arreglo;
+        pilaClone.arreglo = this.arreglo.clone();
         pilaClone.tope = this.tope;
         return pilaClone; 
     }
     
     @Override
     public String toString() {
-        String cadenaPila = "{ ";
-        int recorrido = 0;
-        if ( !this.esVacia() ) {
-            while ( recorrido <= tope ) {
-                cadenaPila += ( String.valueOf( this.arreglo[recorrido] )) + ", ";
-                recorrido++;
+        String cadena = "[";
+        for(int i=tope; i>=0;i--) {
+            cadena += this.arreglo[i];
+            if(i>0) {
+                cadena += ",";
             }
-        } else {
-            cadenaPila = "Pila estatica vacia}";
         }
-        return ( cadenaPila + " }" );
+        return cadena + "]";
     }
     
 }

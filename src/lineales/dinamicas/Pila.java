@@ -2,7 +2,9 @@ package lineales.dinamicas;
 
 /**
  *
- * @author julian.monsalves
+ * @author Julian Monsalves, Legajo FAI-4479
+ * @author Jazmin Elañei Vargas, Legajo FAI-????
+ * @author Julian, Legajo FAI-????
  */
 public class Pila {
     private Nodo tope;
@@ -43,10 +45,6 @@ public class Pila {
         return elemTope;
     } 
     
-    /**
-     * 
-     * @return true si esta vacia, false caso contrario.
-     */
     public boolean esVacia() {
         return this.tope == null;
     }
@@ -62,31 +60,21 @@ public class Pila {
         return topeClon;
     }
     
-    public Pila clonar2() {
-        Pila clonPila = new Pila();
-        if ( !this.esVacia() ) {
-            Nodo aux = this.tope;
-        
-            while(aux != null) {
-                clonPila.apilar(aux.getElem());
-                aux = aux.getEnlace();
-            }
-        }
-        return clonPila;
-    }
     
-    public Pila clonarRec(){
+    @Override
+    public Pila clone(){
         Pila clonPila = new Pila();
         clonPila.tope = clonarRecursivo(this.tope);
         return clonPila;
     }
-    private Nodo clonarRecursivo(Nodo nodoAdelantado) {
-        Nodo nuevoNodo;
-        if( nodoAdelantado == null ){
+    private Nodo clonarRecursivo(Nodo proxNodo) {
+        /*Nodo nuevoNodo;
+        if( proxNodo == null ){
             nuevoNodo = null;
         } else {
-            nuevoNodo = new Nodo(nodoAdelantado.getElem(), clonarRecursivo(nodoAdelantado.getEnlace()));
-        }
+            nuevoNodo = new Nodo(proxNodo.getElem(), clonarRecursivo( proxNodo.getEnlace() ));
+        }*/
+        Nodo nuevoNodo = ( proxNodo == null ) ? null : new Nodo(proxNodo.getElem(), clonarRecursivo( proxNodo.getEnlace() ));
         return nuevoNodo;
     }
     
@@ -106,7 +94,7 @@ public class Pila {
                 s += aux.getElem().toString();
                 aux = aux.getEnlace();
                 if (aux != null) {
-                    s += ", ";
+                    s += ",";
                 }
             }
             s += "]";

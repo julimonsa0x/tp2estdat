@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 import org.junit.Test;
 
-import lineales.estaticas.Cola;
+import lineales.dinamicas.Cola;
 
 /**
  *

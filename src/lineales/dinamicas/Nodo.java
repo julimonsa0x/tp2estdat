@@ -1,8 +1,9 @@
 package lineales.dinamicas;
 
 /**
- *
- * @author julian.monsalves
+ * @author Julian Monsalves, Legajo FAI-4479
+ * @author Jazmin Elañei Vargas, Legajo FAI-????
+ * @author Julian, Legajo FAI-????
  */
 public class Nodo {
     private Object elem;

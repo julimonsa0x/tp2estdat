@@ -1,5 +1,10 @@
 package lineales.dinamicas;
 
+/**
+ * @author Julian Monsalves, Legajo FAI-4479
+ * @author Jazmin Elañei Vargas, Legajo FAI-????
+ * @author Julian, Legajo FAI-????
+ */
 public class Lista {
     private Nodo cabecera;
 
@@ -41,40 +46,42 @@ public class Lista {
      * Caso 1:          ( pos < 1 || pos > longitud() ) -> false <br>
      * Caso especial 2: ( pos == 1 ) -> true <br>
      * Caso general 3:  ( 2 <= pos <= longitud() )  -> true
-     * @param pos laPosicion: int 1~n
+     * @param pos: int 1~n
      * @return true si se elimina correctamente, false si la posición es inválida
      */
     public boolean eliminar(int pos) {
-        boolean exito = true;
-        if (pos < 1 || pos > longitud()) {
-            exito = false;  // caso invalido
-        }
-
-        if (pos == 1) { // Eliminar al principio
-            cabecera = cabecera.getEnlace(); // caso especial 2
-        } else {
-            Nodo aux = cabecera;
-            for (int i = 1; i < pos - 1; i++) {
-                aux = aux.getEnlace();
+        boolean exito = false;
+        if ( !this.esVacia() ){ 
+            if (pos < 1 || pos > longitud()) {
+                exito = false;  // caso invalido
             }
-            aux.setEnlace(aux.getEnlace().getEnlace()); // linkeo b4 -> next
+
+            if (pos == 1) { // Eliminar al principio
+                cabecera = cabecera.getEnlace(); // caso especial 2
+            } else {
+                Nodo aux = cabecera;
+                for (int i = 1; i < pos - 1; i++) {
+                    aux = aux.getEnlace();
+                }
+                aux.setEnlace(aux.getEnlace().getEnlace()); // linkeo anterior -> next
+            }
+            exito = true;
         }
         return exito;
-
     }
 
     public Object recuperar(int pos) {
-        Object obj;
+        Object elObj; 
         if (pos < 1 || pos > longitud()) {
-            obj = null; // caso invalido
+            elObj = null; // caso invalido
         } else {
             Nodo aux = cabecera;
             for (int i = 1; i < pos; i++) {
                 aux = aux.getEnlace();
             }
-            obj = aux.getElem();
+            elObj = aux.getElem();
         }
-        return obj;
+        return elObj;
     }
 
     public int localizar(Object obj) {
@@ -84,9 +91,9 @@ public class Lista {
         while ( !found && aux != null) {
             if (aux.getElem().equals(obj)) {
                 found = true;
-                resultado++;
             } else {
                 aux = aux.getEnlace();
+                resultado++;
             }
 
         }
@@ -98,7 +105,6 @@ public class Lista {
 
     /**
      * @version 1.0: sin atributo longitud
-     * @return
      */
     public int longitud() {
         int longitud = 0;
@@ -118,6 +124,7 @@ public class Lista {
         cabecera = null;
     }
 
+    @Override
     public Lista clone() {
         Lista clon = new Lista();
         Nodo aux1 = this.cabecera;
@@ -140,8 +147,11 @@ public class Lista {
         String cadena = "[";
         Nodo aux = cabecera;
         while (aux != null) {
-            cadena += aux.getElem() + ", ";
+            cadena += aux.getElem().toString();
             aux = aux.getEnlace();
+            if (aux != null) {
+                cadena += ",";
+            }
         }
         return cadena + "]";
     }

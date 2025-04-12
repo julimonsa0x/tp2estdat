@@ -2,12 +2,14 @@ package lineales.estaticas;
 
 /**
  *
- * @author julian.monsalves
+ * @author Julian Andres Monsalves Villagra, Legajo FAI-4479
+ * @author Jazmin Elañei Vargas, Legajo FAI-4480
+ * @author Julian, Legajo
  */
 public class Cola {
     private int frente;
     private int fin;
-    private static final int SIZE = 6; // tamanio fijo estatico circular
+    private static final int SIZE = 10; // tamanio fijo estatico circular
     private Object[] arreglo;
     
     /**
@@ -50,7 +52,7 @@ public class Cola {
     }
     
     public boolean esVacia() {
-        return ( this.frente == this.fin);
+        return ( this.frente == this.fin );
     }
     
     public void vaciar() {
@@ -60,14 +62,13 @@ public class Cola {
             i = ( i+1 ) % this.SIZE; // avanzo circularmente
         }
         this.fin = 0;
-        this.frente = 0;       
+        this.frente = 0;     
     }
     
     public Cola clone() {
         Cola clon = new Cola();
         int i = this.frente;
         while (i != this.fin) {
-            // to-do fix aux reference!!
             Object aux = this.arreglo[i];
             clon.arreglo[i] = aux;
 
@@ -81,8 +82,8 @@ public class Cola {
     @Override
     public String toString() {
         String cadenaCola = "[";
+        int i = this.frente;
         if (!this.esVacia()) {
-            int i = this.frente;
             while (i != this.fin) {
                 cadenaCola += String.valueOf(this.arreglo[i]);
                 i = (i + 1) % SIZE; // Avanzo circularmente

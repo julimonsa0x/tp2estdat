@@ -1,13 +1,18 @@
 package test.lineales;
 
 import TDA.Alumno;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+
 import java.util.Scanner;
-import lineales.dinamicas.Pila;
+import lineales.estaticas.Pila;
 //import static test.lineales.PilaTest.load_stack; // private method!!!!
 
 /**
- *
- * @author julian.monsalves
+ * @author Julian Monsalves, Legajo FAI-4479
+ * @author Jazmin Elañei Vargas, Legajo FAI-????
+ * @author Julian, Legajo FAI-????
  */
 @Deprecated()
 public class MyTestPila {
@@ -17,10 +22,11 @@ public class MyTestPila {
     public static void main(String[] args) {
         Pila pila1 = new Pila();
         Pila pila2 = new Pila();
-        Pila pila3, pila4;
+        Pila pila3 = new Pila();
+        //Pila pila3, pila4;
         
         // test metodo apilar()
-        System.out.println("==== RUNNING test.lineales.TestPila.java ====");
+        System.out.println("==== RUNNING test.lineales.MyTestPila.java ====");
 
 
 
@@ -50,6 +56,7 @@ public class MyTestPila {
         pila1.apilar(5);
         System.out.println("Apilando: 6");
         pila1.apilar(6);
+        pila2 = pila1.clone();
         
         System.out.println( pila1.toString() );
         
@@ -82,9 +89,9 @@ public class MyTestPila {
         
         //test metodo clonar
         System.out.println("Clonando pila2 a pila4 c/ recursion");
-        pila4 = pila2.clonarRec();
+        //pila4 = pila2.clonarRec();
         System.out.println("Clonando pila2 a pila3 con .clonar1() de juli N.");
-        pila3 = pila2.clonar1();
+        //pila3 = pila2.clonar1();
         
         //System.out.println("Testeando metodo esPilaCapicua con los siguientes numeros: ");
         //System.out.println(pila3.toString());
@@ -100,9 +107,32 @@ public class MyTestPila {
         System.out.println(pila2.obtenerTope().toString());
         
         
-        
     }
     
+
+    public void testCloneNonEmptyStack(){
+        Pila p=load_stack("1,2,3",',');
+        Pila pClone=p.clone();
+        boolean ev = p.esVacia();
+        boolean evClone = pClone.esVacia();
+        Object t = p.obtenerTope();
+        Object tClone = pClone.obtenerTope();
+        String s = p.toString();
+        String sClone = pClone.toString();
+        String rx="\\[3,2,1\\]";
+        boolean findSubstring = isSubstring(s,rx);
+        boolean findSubstringClone = isSubstring(sClone, rx);
+        assertEquals(ev,false);
+        assertEquals(evClone,false);
+        assertEquals(t, 3);
+        assertEquals(tClone,3);
+        assertEquals(findSubstring,true);
+        assertEquals(findSubstringClone,true);
+        assertNotEquals(pClone,p);
+        assertEquals(s,sClone);
+    }
+
+
     // punto 3 //
     /**
      * 

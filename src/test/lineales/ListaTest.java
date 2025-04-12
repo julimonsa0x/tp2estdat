@@ -268,8 +268,8 @@ public class ListaTest {
         boolean findSubstringClone = isSubstring(sClone, rx);
         assertEquals(ev,false);
         assertEquals(evClone,false);
-        assertEquals(c, 3);
-        assertEquals(cClone,3);
+        assertEquals(c, 1);
+        assertEquals(cClone,1);
         assertEquals(findSubstring,true);
         assertEquals(findSubstringClone,true);
         assertNotEquals(lClone,l);
