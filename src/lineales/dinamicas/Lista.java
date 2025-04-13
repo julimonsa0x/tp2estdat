@@ -2,8 +2,8 @@ package lineales.dinamicas;
 
 /**
  * @author Julian Monsalves, Legajo FAI-4479
- * @author Jazmin Elañei Vargas, Legajo FAI-????
- * @author Julian, Legajo FAI-????
+ * @author Jazmin Elañei Vargas, Legajo FAI-3023
+ * @author Julian Nuñez, Legajo FAI-3931
  */
 public class Lista {
     private Nodo cabecera;
@@ -24,20 +24,19 @@ public class Lista {
         boolean exito = true;
         if (pos < 1 || pos > longitud()+1) {
             exito = false;  // caso 1
-        }
-
-        Nodo nuevoNodo = new Nodo(obj, null);
-
-        if (pos == 1) { // Insertar al principio
-            nuevoNodo.setEnlace(cabecera);
-            cabecera = nuevoNodo; // caso especial 2
         } else {
-            Nodo aux = cabecera;
-            for (int i = 1; i < pos - 1; i++) {
-                aux = aux.getEnlace();
+            Nodo nuevoNodo = new Nodo(obj, null);
+            if (pos == 1) { // Insertar al principio
+                nuevoNodo.setEnlace(cabecera);
+                cabecera = nuevoNodo; // caso especial 2
+            } else {
+                Nodo aux = cabecera;
+                for (int i = 1; i < pos - 1; i++) {
+                    aux = aux.getEnlace();
+                }
+                nuevoNodo.setEnlace(aux.getEnlace()); // linkeo actual -> next
+                aux.setEnlace(nuevoNodo); // linkeo  b4 -> actual
             }
-            nuevoNodo.setEnlace(aux.getEnlace()); // linkeo actual -> next
-            aux.setEnlace(nuevoNodo); // linkeo  b4 -> actual
         }
         return exito;
     }

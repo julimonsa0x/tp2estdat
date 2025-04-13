@@ -1,9 +1,9 @@
 package lineales.estaticas;
 
 /**
- * @author Julian Andres Monsalves Villagra, Legajo FAI-4479
- * @author Jazmin Elañei Vargas, Legajo FAI-
- * @author Julian, Legajo FAI-????
+ * @author Julian Monsalves, Legajo FAI-4479
+ * @author Jazmin Elañei Vargas, Legajo FAI-3023
+ * @author Julian Nuñez, Legajo FAI-3931
  */
 public class Pila {
     private Object[] arreglo;

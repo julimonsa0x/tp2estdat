@@ -9,8 +9,8 @@ import lineales.dinamicas.Lista;
 
 /**
  * @author Julian Monsalves, Legajo FAI-4479
- * @author Jazmin Elañei Vargas, Legajo FAI-????
- * @author Julian, Legajo FAI-????
+ * @author Jazmin Elañei Vargas, Legajo FAI-3023
+ * @author Julian Nuñez, Legajo FAI-3931
  */
 public class MyTestLista {
     public static void main(String[] args) {
@@ -30,9 +30,12 @@ public class MyTestLista {
         l1.insertar(1,1);
         l1.insertar(2,2);
         l1.insertar(3,3);
-        l1.insertar(10,4);
+        l1.insertar("pepe4",4);
+        l2 = l1.clone();
         l1.insertar(5,5);
-        l1.insertar(6,6);
+        l2.toString();
+        l2.insertar(6,6);
+        
         l1.insertar(7,7);
         l1.insertar(8,8);
         l1.insertar(10,9);
