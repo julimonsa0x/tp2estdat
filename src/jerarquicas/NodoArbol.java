@@ -35,4 +35,12 @@ public class NodoArbol {
     public void setLeftChild(NodoArbol unHijo) {
         this.izquierdo = unHijo;
     }
+
+    public String toString() {
+        boolean leftNull = (this.izquierdo != null);
+        boolean rightNull = (this.derecho != null);
+        return "[HI: "+ ((leftNull) ? this.izquierdo.getElem() : "null") +"]<-(elem: "+this.elem+")->[HD: "+ ((rightNull) ? this.derecho.getElem() : "null") +"]";
+    }
+    
+
 }

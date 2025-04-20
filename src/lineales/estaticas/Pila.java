@@ -8,7 +8,7 @@ package lineales.estaticas;
 public class Pila {
     private Object[] arreglo;
     private int tope;
-    private static final int size = 20; 
+    private static final int size = 10; 
     
     public Pila() {
         this.arreglo = new Object[size];
@@ -30,19 +30,9 @@ public class Pila {
     }
     
     public boolean desapilar() {
-        /*boolean exito;
-        if (this.tope > -1) {
-            this.arreglo[tope] = null;
-            tope--;
-            exito = true;
-        } else {
-            // error: pila vacia (tope -1)
-            exito = false;
-        } 
-        return exito;*/
         boolean exito;
         if(this.tope == -1) {
-            //Error: pila vacia
+            //Error de pila vacia
             exito = false;
         } else {
             //pone el elemento tope en nulo y baja el tope al espacio anterior
@@ -58,7 +48,7 @@ public class Pila {
         if ( !this.esVacia() ) {
             pepe = this.arreglo[tope];
         } else {
-            // error: el tope es nulo porque la pila esta vacia
+            // error: el tope es nulo --> pila vacia
             pepe = null;
         }
         return pepe;
@@ -69,7 +59,7 @@ public class Pila {
     }
     
     public void vaciar() {
-        // arreglo = new Object[size]; --> es uno por uno el vaciado
+        // arreglo = new Object[size]; --> es uno por uno el vaciado!!!
         int i;
         for (i = tope; i > -1; i--) {
             this.arreglo[i] = null;
@@ -81,7 +71,7 @@ public class Pila {
     @Override
     public Pila clone() {
         Pila pilaClone = new Pila();
-        pilaClone.arreglo = this.arreglo.clone();
+        pilaClone.arreglo = this.arreglo.clone(); // segun el javadoc de Array.clone(): x.clone() != x :)
         pilaClone.tope = this.tope;
         return pilaClone; 
     }

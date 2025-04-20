@@ -5,5 +5,15 @@
         "lib/**/*.jar"
     ],
     "java.debug.settings.onBuildFailureProceed": true,
-    "java.debug.settings.showStaticVariables": true
+    "java.debug.settings.showStaticVariables": true,
+    "java.debug.settings.showQualifiedNames": false,
+    "java.debug.settings.showHex": false,
+    "java.debug.settings.showLogicalStructure": true,
+    "github.copilot.enable": {
+        "*": true,
+        "plaintext": true,
+        "markdown": true,
+        "scminput": false,
+        "yaml": false
+    }
 }

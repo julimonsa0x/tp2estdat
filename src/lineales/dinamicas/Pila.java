@@ -84,7 +84,6 @@ public class Pila {
         String s = "";
         
         if ( this.tope == null ){
-            //s = "Pila dinamica vacia"; rompe el @Test --> testCreateEmptyStack()
             s = "[]";
         } else {
             Nodo aux = this.tope;

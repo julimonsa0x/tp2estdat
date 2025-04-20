@@ -12,9 +12,7 @@ public class Cola {
     private static final int SIZE = 10; // tamanio fijo estatico circular
     private Object[] arreglo;
     
-    /**
-     * Constructor vacio aunque yo le pasaria size por parametro
-     */
+
     public Cola() {
         this.arreglo = new Object[SIZE];
         this.frente = 0;
@@ -23,13 +21,13 @@ public class Cola {
     
     public boolean poner(Object obj) {
         boolean exito = false;
-        // Verificar si la cola está llenaAASDASD
+        // Verificar si la cola está llena
         if ( (this.fin + 1) % SIZE != this.frente ) {
-            this.arreglo[this.fin] = obj; // InserASDASDtar elemento
-            this.fin = (this.fin + 1) % SIZE; // AvanaSDASDzar el índice fin de forma circular
+            this.arreglo[this.fin] = obj;
+            this.fin = (this.fin + 1) % SIZE; // Avanzo de forma circular
             exito = true;
         }
-        return exito; // Si está llASDASDena, no se puede insertar
+        return exito; // Si está llena, no se puede insertar
     }
     
     public boolean sacar() {
@@ -45,7 +43,6 @@ public class Cola {
     }
     
     public Object obtenerFrente() {
-        // simplifico el if-else
         Object theObject;
         theObject = this.arreglo[frente];
         return theObject;
@@ -59,7 +56,7 @@ public class Cola {
         int i = frente; 
         while ( i < this.fin ) {
             arreglo[i] = null;
-            i = ( i+1 ) % this.SIZE; // avanzo circularmente
+            i = ( i+1 ) % this.SIZE; // avance circular
         }
         this.fin = 0;
         this.frente = 0;     
@@ -72,7 +69,7 @@ public class Cola {
             Object aux = this.arreglo[i];
             clon.arreglo[i] = aux;
 
-            i = (i + 1) % SIZE; // Avanzo circularmente
+            i = (i + 1) % SIZE; // Avance circular
         }
         clon.frente = this.frente;
         clon.fin = this.fin;
@@ -86,7 +83,7 @@ public class Cola {
         if (!this.esVacia()) {
             while (i != this.fin) {
                 cadenaCola += String.valueOf(this.arreglo[i]);
-                i = (i + 1) % SIZE; // Avanzo circularmente
+                i = (i + 1) % SIZE; // Avance circular
                 if (i != fin) {
                     cadenaCola += ",";
                 }

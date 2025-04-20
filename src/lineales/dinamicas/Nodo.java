@@ -14,7 +14,6 @@ public class Nodo {
         this.enlace = enlace;
     }
     
-    // setters
     public void setElem(Object elem) {
         this.elem = elem;
     }
@@ -23,7 +22,6 @@ public class Nodo {
         this.enlace = enlace;
     }
     
-    //getters
     public Object getElem(){
         return elem;
     }
