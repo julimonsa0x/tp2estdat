@@ -23,10 +23,10 @@ public class NodoArbol {
     public void setElem(Object elem) {
         this.elem = elem;
     }
-    public NodoArbol getLeftChild() {
+    public NodoArbol getHI() {
         return this.izquierdo;
     }
-    public NodoArbol getRightChild() {
+    public NodoArbol getHD() {
         return this.derecho;
     }
     public void setRightChild(NodoArbol unHijo) {
@@ -35,6 +35,7 @@ public class NodoArbol {
     public void setLeftChild(NodoArbol unHijo) {
         this.izquierdo = unHijo;
     }
+
 
     public String toString() {
         boolean leftNull = (this.izquierdo != null);

@@ -13,9 +13,10 @@ public class Lista {
     }
 
     /**
-     * Caso 1:          ( pos < 1 || pos > longitud() + 1 ) -> false <br>
+     * Caso out of range:      ( pos < 1 || pos > longitud() + 1 ) -> false <br>
      * Caso especial 2: ( pos == 1 ) -> true <br>
-     * Caso general 3:  ( 2 <= pos <= longitud() + 1 )  -> true
+     * Caso general 3:  ( 2 <= pos <= longitud() + 1 )  ->  true <br>
+     * Para insertar siempre considerar {@code int pos = lis.longitud() + 1 } ( similar a .append() de python )
      * @param obj elObjeto a insertar: Object
      * @param pos laPosicion: int 1~n
      * @return true si se inserta correctamente, false si la posición es inválida
