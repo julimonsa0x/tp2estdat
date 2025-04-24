@@ -70,6 +70,11 @@ public class Lista {
         return exito;
     }
 
+    /**
+     * @param pos: int posicion de rango 1~n.
+     * @return objeto en la posicion buscada, recuperar un n fuera de rango 1~n devuelve Object null.
+     * @implNote Complejidad O(n) sin el atributo longitud puesto que para buscar el j-esimo Object entre 1~n tengo que hacer j iteraciones.
+     */
     public Object recuperar(int pos) {
         Object elObj; 
         if (pos < 1 || pos > longitud()) {
@@ -104,6 +109,7 @@ public class Lista {
     }
 
     /**
+     * @return 0 if empty list
      * @version 1.0: sin atributo longitud
      */
     public int longitud() {
@@ -116,6 +122,9 @@ public class Lista {
         return longitud;
     }
 
+    /**
+     * @return true if unico atributo cabecera is null, false otherwise.
+     */
     public boolean esVacia() {
         return cabecera == null;
     }
@@ -155,5 +164,54 @@ public class Lista {
         }
         return cadena + "]";
     }
+
+    /***********************************************
+     * Metodos extras para ejercitacion de parcial *
+     ***********************************************/
+
+
+    /**
+     * @param l una Lista a multiplicar
+     * @param mult cantidad de multiplicaciones
+     * @return Lista<Object> multilpicada. ejemplo: invocar {@codemultSec([1,2,3], 3) devuelve [1,2,3,1,2,3,1,2,3]}.
+     */
+    public Lista multSec(int mult) {
+        Lista newL = new Lista();
+        for ( int i = 1; i <= mult; i++ ) {
+            int j = 1;
+            while ( this.recuperar(j) != null ) { 
+                newL.insertar( this.recuperar(j), j); // Lista.recuperar(n) seria como List[n-1] en python.
+                j++;
+            }
+        }
+        return newL;
+    }
+
+    /**
+     * a this le agrego al final 1 por 1 los elementos de otra lista
+     * e.g {@code [a,b,c].append([x,y,z]) retorna [a,b,c,x,y,z]} ✅
+     * seria incorrecto agregarle directamente la segunda lista a
+     * la primera en la ultima posicion, e.g -> {@code [a,b,c,[x,y,z]]} ❌
+     */
+    public void append(Lista listaFrom) {
+        int pos = 1;
+        while ( listaFrom.recuperar(pos) != null ) {
+            this.insertar( listaFrom.recuperar(pos), this.longitud()+1 );
+            pos++;
+        }
+    }
+    // mas eficiente
+    public void append2(Lista listaFrom) {
+        Nodo aux = this.cabecera;
+        while ( aux.getEnlace()!=null ) {
+            aux = aux.getEnlace();
+        }
+        aux.setEnlace(listaFrom.cabecera);
+        Lista result = new Lista();
+        result.cabecera = aux;
+    }
+
+    
+
 
 }

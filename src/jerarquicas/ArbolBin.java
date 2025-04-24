@@ -8,6 +8,9 @@ public class ArbolBin {
     public ArbolBin() {
         this.raiz = null;
     }
+    public ArbolBin(NodoArbol unaRaizPrecargada){
+        this.raiz = unaRaizPrecargada;
+    }
 
     /**
      * Dado un elemento elemNuevo y un elemento elemPadre, inserta elemNuevo como hijo izquierdo o
@@ -33,10 +36,10 @@ public class ArbolBin {
             // padre existe y lugar disponible -> inserto 
             if (nPadre != null) {
                 if( lugar == 'I' && nPadre.getHI() == null ){
-                    nPadre.setLeftChild( new NodoArbol(objNew, null, null) );
+                    nPadre.setHI( new NodoArbol(objNew, null, null) );
                     exito = true;
                 } else if ( lugar == 'D' && nPadre.getHD() == null ) {
-                    nPadre.setRightChild( new NodoArbol(objNew, null, null) );
+                    nPadre.setHD( new NodoArbol(objNew, null, null) );
                     exito = true;
                 } 
             }
@@ -86,9 +89,9 @@ public class ArbolBin {
         // metodo recursivo PRIVADO xq su param nodo expone la estructura interna de la clase.
         if(nodo != null) {
             listarInordenAux(nodo.getHI(), lis); // subarbol izq ([I] -> R -> D) en inorden.
-            // visita el elemento en el nodo
+            // logica sobre el nodo (I -> [R] -> D)
             lis.insertar(nodo.getElem(), lis.longitud()+1);
-            listarInordenAux(nodo.getHD(), lis); // subarbol der ([I] -> R -> D) en inorden.
+            listarInordenAux(nodo.getHD(), lis); // subarbol der (I -> R -> [D]) en inorden.
         }
     }
 
@@ -183,16 +186,16 @@ public class ArbolBin {
      * @return altura del árbol, es decir la longitud del camino más largo desde la raíz hasta una hoja
      */
     public int altura() {
-        return alturaRec(this.raiz);
+        return alturaAux(this.raiz);
     }
 
-    private int alturaRec(NodoArbol nodo) {
+    private int alturaAux(NodoArbol nodo) {
         int altura;
         if (nodo == null) {
             altura = -1; // altura de un arbol vacio
         } else {
-            int alturaIzquierda = alturaRec( nodo.getHI() );
-            int alturaDerecha = alturaRec( nodo.getHD() );
+            int alturaIzquierda = alturaAux( nodo.getHI() );
+            int alturaDerecha = alturaAux( nodo.getHD() );
             altura = Math.max(alturaIzquierda, alturaDerecha) + 1;
         }
         return altura;
@@ -231,21 +234,21 @@ public class ArbolBin {
         boolean exito = false;
         posHijo = Character.toUpperCase(posHijo); // para evitar problemas con minusculas
         if (this.raiz == null) {
-            // arbol vacio -> piso raiz
+            // caso base o especial: arbol vacio -> piso raiz
             this.raiz = new NodoArbol(elemNuevo, null,null);
             exito = true;
         } else {
-            // arbol no vacio -> busco padre
+            // cualquier otro caso -> busco al padre
             // si posPadre esta dentro del rango de la lista en preorden --> no sera null
             NodoArbol nPadre = obtenerNodoPorPos(this.raiz, posPadre);
 
             if (nPadre != null) {
-                // entro solo si el nPadre fue encontrado, lo que implica que posPadre sea valido!
+                // entro solo si el nPadre fue encontrado, lo que implica que posPadre sea valido!!
                 if( posHijo == 'I' && nPadre.getHI() == null ){
-                    nPadre.setLeftChild(new NodoArbol(elemNuevo,null,null));
+                    nPadre.setHI(new NodoArbol(elemNuevo,null,null));
                     exito = true;
                 } else if ( posHijo == 'D' && nPadre.getHD() == null ) {
-                    nPadre.setRightChild(new NodoArbol(elemNuevo,null,null));
+                    nPadre.setHD(new NodoArbol(elemNuevo,null,null));
                     exito = true;
                 } 
             }
@@ -254,10 +257,10 @@ public class ArbolBin {
 
     private NodoArbol obtenerNodoPorPos(NodoArbol elNodo, int posBuscada) {
         NodoArbol resultado = null;
-        // implementacion a) decrementar n hasta llegar a 1 mientras recorro en preorden, en el caso base se llega al nodo buscado
+        // decrementar n hasta llegar a 1 mientras recorro en preorden, en el caso base se llega al nodo buscado
         if (elNodo != null) {
             if (posBuscada == 1) {
-                // n es el buscado -> devuelvo n
+                // n es el buscado -> devuelvo n. en caso que el nodo buscado no exista en el arbol, esto nunca se triggerea y en el else retorno un null.
                 resultado = elNodo;
             } else {
                 // caso contrario -> busco 1ro el HI
@@ -360,8 +363,8 @@ public class ArbolBin {
             nodoClonado = null;
         } else {
             nodoClonado = new NodoArbol( nodoOriginal.getElem(), null, null );
-            nodoClonado.setLeftChild( cloneAux( nodoOriginal.getHI() ) ); 
-            nodoClonado.setRightChild( cloneAux( nodoOriginal.getHD() ) );
+            nodoClonado.setHI( cloneAux( nodoOriginal.getHI() ) ); 
+            nodoClonado.setHD( cloneAux( nodoOriginal.getHD() ) );
         }
         return nodoClonado;
     }
@@ -448,6 +451,9 @@ public class ArbolBin {
         return result;
     }
 
+    /* ========== Metodos Extras ========== */
+    /* ========== Metodos Extras ========== */
+    /* ========== Metodos Extras ========== */
     /* ========== Metodos Extras ========== */
 
     /**
@@ -541,4 +547,108 @@ public class ArbolBin {
             }
         }
     }
+
+    /**
+     * Verifica si el patrón coincide exactamente con algún camino desde la raíz hasta una hoja.
+     * 
+     * @param patron lista de elementos que representan un posible camino.
+     * @return true si el patrón coincide exactamente con un camino del árbol; false en caso contrario.
+     * @implNote un patron vacio coincide con un árbol vacío -> retorna true, esta bien? 
+     */
+    public boolean verificarPatron(Lista patron) {
+        boolean patronValido;
+        int posActual = 1; // rango lista 1~n
+        if ( this.esVacio() && patron.esVacia() ) { // --> seria comparar  [] contra [] hace falta???
+            patronValido = true;
+        } else {
+            patronValido = verificarPatronAux(this.raiz, patron, posActual);
+        }
+        return patronValido;
+    }
+    private boolean verificarPatronAux(NodoArbol nActual, Lista elPatron, int posNodoPatron) {
+        boolean mismoNodoActual = false;
+        if ( nActual != null ) { // caso base corto recursion
+            if ( nActual.getElem().equals( elPatron.recuperar( posNodoPatron ) ) ) { // si son iguales...
+                if ( nActual.getHI() != null && elPatron.recuperar( posNodoPatron + 1 ) != null ) { // si los siguientes son ambos iguales...
+                    mismoNodoActual = verificarPatronAux( nActual.getHI(), elPatron, posNodoPatron+1 ); // bajo a la izq., recursivamente.
+                    if ( !mismoNodoActual ) { // no encontre en subarbol izq...
+                        mismoNodoActual = verificarPatronAux( nActual.getHD(), elPatron, posNodoPatron+1 ); // entonces busco subarbol der...
+                    }
+                } else if ( nActual.getHI() == null && nActual.getHD() == null && elPatron.recuperar( posNodoPatron + 1 ) == null ) { // solo si llegue a una hoja y el proximo en la lista es null, corto.
+                    mismoNodoActual = true;
+                }
+            }
+        }
+        return mismoNodoActual;
+    }
+
+    public ArbolBin clonarInvertido() {
+        ArbolBin nuevo = new ArbolBin();
+        nuevo.raiz = clonarInvertidoAux(raiz);
+        return nuevo;
+    }
+    
+    private NodoArbol clonarInvertidoAux(NodoArbol nodoActual) {
+        NodoArbol nodoMirrored;
+        if (nodoActual == null) {
+            nodoMirrored = null;
+        } else { 
+            // Create a new node with the same data
+            nodoMirrored = new NodoArbol( nodoActual.getElem(), null, null );
+            // Clono de manera recursiva el subarbol izquierdo actual y lo asigno a la derecha
+            nodoMirrored.setHD(clonarInvertidoAux( nodoActual.getHI() ));
+            // lo mismo con subarbol izquierdo actual, lo asigno a la izquierda
+            nodoMirrored.setHI(clonarInvertidoAux( nodoActual.getHD() ));
+        }
+        return nodoMirrored;
+    }
+    
+    /**
+     * @implNote dificil de testear puesto que requiere un arbol bien construido, ideal pedirle a chatgpt una creacion de arbol a partir de un unico NodoArbol, puesto que insertar nodos repetidos pisa las referencias y crea arboles feos que no se condicen con lo deseado!!!
+     * @param elem elemento repetido a buscar
+     * @return true if elem esta 2 o mas veces en el arbol
+     */
+    public boolean estaRepetido(Object elem) {
+        return estaRepetidoAux(elem, this.raiz, 0);
+    }
+    private boolean estaRepetidoAux(Object buscado, NodoArbol nodoActual, int repes) {
+        boolean masDeDosVeces = false;
+        int cont = repes;
+        if ( nodoActual != null ) {
+            if ( nodoActual.getElem().equals(buscado) ) {
+                cont++;
+                if ( cont > 1 ) {
+                    masDeDosVeces = true;
+                }
+            }
+            if ( !masDeDosVeces ) {
+                masDeDosVeces = estaRepetidoAux(buscado, nodoActual.getHI(), cont);
+            }
+            if ( !masDeDosVeces ) {
+                masDeDosVeces = estaRepetidoAux(buscado, nodoActual.getHD(), cont);
+            }
+        }
+        return masDeDosVeces;
+    }
+
+    /**
+     * Ejercicio de parcial 2018
+     * @param nodoInicial de tipo entero y no Object porque se asume {@code this.class() ArbolBin <int>}
+     * @return lista inorden del subarbol que tiene como raiz a nodoInicial
+     */
+    public Lista armarListaInordenDesde(Object nodoInicial) {
+        Lista lisDesde = new Lista();
+        NodoArbol newRaiz = obtenerNodo(this.raiz, nodoInicial);
+        armarListaInordenDesdeAux(newRaiz, lisDesde);
+        return lisDesde;
+    }
+    private void armarListaInordenDesdeAux( NodoArbol start, Lista laLista ){
+        if ( start != null ) {
+            armarListaInordenDesdeAux(start.getHI(), laLista);
+            laLista.insertar(start.getElem(), laLista.longitud() + 1);
+            armarListaInordenDesdeAux(start.getHD(), laLista);
+
+        }
+    }
+
 }

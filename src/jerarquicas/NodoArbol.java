@@ -29,10 +29,10 @@ public class NodoArbol {
     public NodoArbol getHD() {
         return this.derecho;
     }
-    public void setRightChild(NodoArbol unHijo) {
+    public void setHD(NodoArbol unHijo) {
         this.derecho = unHijo;
     }
-    public void setLeftChild(NodoArbol unHijo) {
+    public void setHI(NodoArbol unHijo) {
         this.izquierdo = unHijo;
     }
 

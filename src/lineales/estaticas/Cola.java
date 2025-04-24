@@ -56,7 +56,7 @@ public class Cola {
         int i = frente; 
         while ( i < this.fin ) {
             arreglo[i] = null;
-            i = ( i+1 ) % this.SIZE; // avance circular
+            i = ( i+1 ) % SIZE; // avance circular
         }
         this.fin = 0;
         this.frente = 0;     
