@@ -165,7 +165,8 @@ public class MyTestLista {
         //int i = 1;
         boolean deboInvertir = false;
         // FIX! ultimo bloque se hace nullpero queda pendiente pasarlo a listaFinal
-        while ( !qAux.esVacia() || !listDuplicar.esVacia() && !pilaInvertir.esVacia()) {
+        // agregar logica nuevamente en un if abajo de char actual que controle el envio desde pilaInv y listaDup a listaFinal?????
+        while ( !qAux.esVacia() || (!listDuplicar.esVacia() && !pilaInvertir.esVacia()) ) {
             char charActual = (char) qAux.obtenerFrente(); // casteo necesario puesto que mi TDA cola no implementa generics y no tengo Cola<char>!!!
             if ( !deboInvertir ) { // si no encontre vocales...
                 if ( charActual == '#' ) { // cierro bloque  
